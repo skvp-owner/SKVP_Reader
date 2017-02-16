@@ -182,13 +182,13 @@ public class Test45 extends AbstractTest {
 			if (reader.getCameraLocation().getZ() != 1.2){
 				return 39;
 			}
-			if (reader.getCameraRotation().getX() != 5){
+			if (reader.getCameraDestination().getX() != 5){
 				return 40;
 			}
-			if (reader.getCameraRotation().getY() != 6){
+			if (reader.getCameraDestination().getY() != 6){
 				return 41;
 			}
-			if (reader.getCameraRotation().getZ() != 7.4){
+			if (reader.getCameraDestination().getZ() != 7.4){
 				return 42;
 			}
 		} catch (SKVPNonInitializedReaderException e) {

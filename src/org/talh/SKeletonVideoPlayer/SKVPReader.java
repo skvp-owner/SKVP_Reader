@@ -25,7 +25,7 @@ public class SKVPReader {
 	private double connectionsRadius;
 	private ElementColor connectionsColor;
 	private Coordinate3D cameraLocation;
-	private Coordinate3D cameraRotation;
+	private Coordinate3D cameraDestination;
 	
 	/**
 	 * Create a new <b>uninitialized</b> instance of SKVPReader
@@ -127,10 +127,10 @@ public class SKVPReader {
 		} else {
 			this.cameraLocation = Utils.stringToCoordinate3D(headerEntriesAsStrings.get(Defs.CAMERA_LOCATION_ENTRY_NAME));
 		}
-		if (headerEntriesAsStrings.get(Defs.CAMERA_ROTATION_ENTRY_NAME) == null) {
-			this.cameraRotation = Utils.stringToCoordinate3D(Defs.CAMERA_ROTATION_DEFAULT_COORDINATE_STR);
+		if (headerEntriesAsStrings.get(Defs.CAMERA_DESTINATION_ENTRY_NAME) == null) {
+			this.cameraDestination = Utils.stringToCoordinate3D(Defs.CAMERA_DESTINATION_DEFAULT_COORDINATE_STR);
 		} else {
-			this.cameraRotation = Utils.stringToCoordinate3D(headerEntriesAsStrings.get(Defs.CAMERA_ROTATION_ENTRY_NAME));
+			this.cameraDestination = Utils.stringToCoordinate3D(headerEntriesAsStrings.get(Defs.CAMERA_DESTINATION_ENTRY_NAME));
 		}
 	}
 
@@ -263,17 +263,17 @@ public class SKVPReader {
 	}
 	
 	/**
-	 * Get the defined rotation of the camera
+	 * Get the view destination point of the camera
 	 * 
 	 * 
-	 * @return a 3D coordinate consists of the rotation angle for each of the axes (X,Y,Z)
+	 * @return a 3D coordinate refers to the camera destination
 	 * @throws SKVPNonInitializedReaderException
 	 */
-	public synchronized Coordinate3D getCameraRotation() throws SKVPNonInitializedReaderException {
+	public synchronized Coordinate3D getCameraDestination() throws SKVPNonInitializedReaderException {
 		if (! headerReadSuccessfully) {
 			throw new SKVPNonInitializedReaderException();
 		}
-		return cameraRotation;
+		return cameraDestination;
 	}
 	
 	

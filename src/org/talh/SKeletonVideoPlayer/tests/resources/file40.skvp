@@ -2,7 +2,7 @@
 NumJoints=3
 FPS=28.4
 Connections=
-CameraRotation=9,4.5
+CameraDestination=9,4.5
 
 
 *Video*
