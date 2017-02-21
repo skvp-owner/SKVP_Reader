@@ -63,6 +63,7 @@ public class TestsRunner {
 		tests.add(new Test55());
 		tests.add(new Test56());
 		tests.add(new Test57());
+		tests.add(new Test58());
 		int num = 0;		
 		int numPassed = 0;
 		for (AbstractTest test : tests) {

@@ -80,7 +80,7 @@ public class Utils {
 		return connections;
 	}
 
-	public static SkeletonVideoFrame stringToSkeletonVideoFrame(String line, int numJoints) throws SKVPSyntaxErrorException {
+	public static SkeletonVideoFrame stringToSkeletonVideoFrame(String line, int numJoints, Coordinate3D cameraLocation, Coordinate3D cameraDestination, double cameraSceneRotation) throws SKVPSyntaxErrorException {
 		String[] jointsAsStrings = line.split(";");
 		if (jointsAsStrings.length != numJoints) {
 			throw new SKVPSyntaxErrorException("Frame description does not match number of joints: " + numJoints);
@@ -89,6 +89,9 @@ public class Utils {
 		for (int i = 0 ; i < numJoints ; i++) {
 			frame.setCoordinate(i + 1, stringToCoordinate3D(jointsAsStrings[i]));
 		}
+		frame.setCameraLocation(cameraLocation);
+		frame.setCameraDestination(cameraDestination);
+		frame.setCameraSceneRotation(cameraSceneRotation);
 		
 		return frame;
 	}
@@ -215,6 +218,15 @@ public class Utils {
 		double realDiff = degree - degreeFloor;
 		
 		return degreeFloor % 360 + realDiff;
+	}
+	
+	public static String getValueFromCameraLine(String line) throws SKVPSyntaxErrorException {
+		String[] parts = line.split("=");
+		if (parts.length != 2) {
+			throw new SKVPSyntaxErrorException("Illegal camera paremeter line");
+		}
+		
+		return parts[1].trim();
 	}
 	
 }

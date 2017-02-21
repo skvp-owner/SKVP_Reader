@@ -27,6 +27,9 @@ public class SKVPReader {
 	private Coordinate3D cameraLocation;
 	private Coordinate3D cameraDestination;
 	private double cameraSceneRotation;
+	private Coordinate3D cameraLocationTemporal;
+	private Coordinate3D cameraDestinationTemporal;
+	private double cameraSceneRotationTemporal;
 	private long numFrames;
 	
 	/**
@@ -129,11 +132,13 @@ public class SKVPReader {
 		} else {
 			this.cameraLocation = Utils.stringToCoordinate3D(headerEntriesAsStrings.get(Defs.CAMERA_LOCATION_ENTRY_NAME));
 		}
+		this.cameraLocationTemporal = this.cameraLocation;
 		if (headerEntriesAsStrings.get(Defs.CAMERA_DESTINATION_ENTRY_NAME) == null) {
 			this.cameraDestination = Utils.stringToCoordinate3D(Defs.CAMERA_DESTINATION_DEFAULT_COORDINATE_STR);
 		} else {
 			this.cameraDestination = Utils.stringToCoordinate3D(headerEntriesAsStrings.get(Defs.CAMERA_DESTINATION_ENTRY_NAME));
 		}
+		this.cameraDestinationTemporal = this.cameraDestination;
 		if (headerEntriesAsStrings.get(Defs.NUM_FRAMES_ENTRY_NAME) == null) {
 			this.numFrames = Defs.UNKNOWN_NUM_FRAMES_RETURN_VAL;
 		} else {
@@ -151,6 +156,7 @@ public class SKVPReader {
 		} else {
 			this.cameraSceneRotation = Utils.parseRealDegree(headerEntriesAsStrings.get(Defs.CAMERA_SCENE_ROTATION_ENTRY_NAME));
 		}
+		this.cameraSceneRotationTemporal = this.cameraSceneRotation;
 	}
 
 	/**
@@ -374,12 +380,25 @@ public class SKVPReader {
 			if (line.equals("")) {
 				continue;
 			}
+			if (line.startsWith(Defs.CAMERA_LOCATION_ENTRY_NAME)) {
+				String value = Utils.getValueFromCameraLine(line);
+				cameraLocationTemporal = Utils.stringToCoordinate3D(value);
+				continue;
+			} else if (line.startsWith(Defs.CAMERA_DESTINATION_ENTRY_NAME)) {
+				String value = Utils.getValueFromCameraLine(line);
+				cameraDestinationTemporal = Utils.stringToCoordinate3D(value);
+				continue;
+			} else if (line.startsWith(Defs.CAMERA_SCENE_ROTATION_ENTRY_NAME)) {
+				String value = Utils.getValueFromCameraLine(line);
+				cameraSceneRotationTemporal = Utils.parseRealDegree(value);
+				continue;
+			}
 			break;
 		}
 		if (line == null) {
 			return null;
 		}
-		return Utils.stringToSkeletonVideoFrame(line, this.numJoints);
+		return Utils.stringToSkeletonVideoFrame(line, this.numJoints, cameraLocationTemporal, cameraDestinationTemporal, cameraSceneRotationTemporal);
 	}
 	
 	/**
