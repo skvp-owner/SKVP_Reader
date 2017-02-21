@@ -14,6 +14,9 @@ public class Defs {
 	public final static String CONNECTIONS_COLOR_ENTRY_NAME = "ConnectionsColor";
 	public final static String CAMERA_LOCATION_ENTRY_NAME = "CameraLocation";
 	public final static String CAMERA_DESTINATION_ENTRY_NAME = "CameraDestination";
+	public final static String NUM_FRAMES_ENTRY_NAME = "NumberOfFrames";
+	public final static String CAMERA_SCENE_ROTATION_ENTRY_NAME = "CameraSceneRotation";
+	public final static long UNKNOWN_NUM_FRAMES_RETURN_VAL = -1;
 	public final static double DEFAULT_RADIUS = 1.0;
 	public final static double DEFAULT_CONNECTION_RADIUS = 0.5;
 	public final static Color DEFAULT_DIFFUSE_COLOR = Color.DARKBLUE;
@@ -22,5 +25,8 @@ public class Defs {
 	public final static Color DEFAULT_CONNECTION_SPECULAR_COLOR = Color.RED;
 	public final static String CAMERA_LOCATION_DEFAULT_COORDINATE_STR = "0,0,0";
 	public final static String CAMERA_DESTINATION_DEFAULT_COORDINATE_STR = "0,0,1";
+	public final static double DEFAULT_CAMERA_SCENE_ROTATION = 0;
+	
+	
 	
 }

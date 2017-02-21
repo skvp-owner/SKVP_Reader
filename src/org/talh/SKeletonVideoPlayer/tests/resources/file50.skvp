@@ -1,0 +1,20 @@
+*SKeleton Video Player File Header*
+NumJoints=3
+FPS=28.4
+Connections=
+CameraLocation=9,4.5,1.2
+CameraDestination=5,6,7.4
+CameraSceneRotation=Kuku
+
+*Video*
+1,2,3;4,5,6;7,8,9
+2,3,4;5,6,7;8,9,1
+3,4,5;6,7,8;9,1,2
+4,5,6;7,8,9;1,2,3
+5,6,7;8,9,1;2,3,4
+6,7,8;9,1,2;3,4,5
+7,8,9;1,2,3;4,5,6
+8,9,1;2,3,4;5,6,7
+9,1,2;3,4,5;6,7,8
+1.0,2,3;4,5.0,6;7,8,9.7
+

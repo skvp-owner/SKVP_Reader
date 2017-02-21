@@ -198,5 +198,23 @@ public class Utils {
 		
 		return colors;
 	}
+
+	public static double parseRealDegree(String degreeAsString) throws SKVPSyntaxErrorException {
+		double degree;
+		try {
+			degree = Double.parseDouble(degreeAsString);			
+		} catch (NumberFormatException e) {
+			throw new SKVPSyntaxErrorException("Input degree is not a real number");
+		}
+		if (degree < 0) {
+			// Setting the degree positive
+			long numFullRoutes = ((long)(degree * (-1)) / 360);
+			degree = 360 * (numFullRoutes + 1) + degree;
+		}
+		long degreeFloor = (int)degree;
+		double realDiff = degree - degreeFloor;
+		
+		return degreeFloor % 360 + realDiff;
+	}
 	
 }

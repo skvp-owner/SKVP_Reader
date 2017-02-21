@@ -51,6 +51,18 @@ public class TestsRunner {
 		tests.add(new Test43());
 		tests.add(new Test44());
 		tests.add(new Test45());
+		tests.add(new Test46());
+		tests.add(new Test47());
+		tests.add(new Test48());
+		tests.add(new Test49());
+		tests.add(new Test50());
+		tests.add(new Test51());
+		tests.add(new Test52());
+		tests.add(new Test53());
+		tests.add(new Test54());
+		tests.add(new Test55());
+		tests.add(new Test56());
+		tests.add(new Test57());
 		int num = 0;		
 		int numPassed = 0;
 		for (AbstractTest test : tests) {

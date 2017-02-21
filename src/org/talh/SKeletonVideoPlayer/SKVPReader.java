@@ -26,6 +26,8 @@ public class SKVPReader {
 	private ElementColor connectionsColor;
 	private Coordinate3D cameraLocation;
 	private Coordinate3D cameraDestination;
+	private double cameraSceneRotation;
+	private long numFrames;
 	
 	/**
 	 * Create a new <b>uninitialized</b> instance of SKVPReader
@@ -132,6 +134,23 @@ public class SKVPReader {
 		} else {
 			this.cameraDestination = Utils.stringToCoordinate3D(headerEntriesAsStrings.get(Defs.CAMERA_DESTINATION_ENTRY_NAME));
 		}
+		if (headerEntriesAsStrings.get(Defs.NUM_FRAMES_ENTRY_NAME) == null) {
+			this.numFrames = Defs.UNKNOWN_NUM_FRAMES_RETURN_VAL;
+		} else {
+			try {
+				this.numFrames = Long.parseLong(headerEntriesAsStrings.get(Defs.NUM_FRAMES_ENTRY_NAME));
+			} catch (NumberFormatException e) {
+				throw new SKVPSyntaxErrorException(Defs.NUM_FRAMES_ENTRY_NAME + " value must be a non-negative integer");
+			}
+			if (this.numFrames < 0) {
+				throw new SKVPIllegalValueException("Number of frames must be a non-negative integer");
+			}
+		}
+		if (headerEntriesAsStrings.get(Defs.CAMERA_SCENE_ROTATION_ENTRY_NAME) == null) {
+			this.cameraSceneRotation = Defs.DEFAULT_CAMERA_SCENE_ROTATION;
+		} else {
+			this.cameraSceneRotation = Utils.parseRealDegree(headerEntriesAsStrings.get(Defs.CAMERA_SCENE_ROTATION_ENTRY_NAME));
+		}
 	}
 
 	/**
@@ -178,6 +197,20 @@ public class SKVPReader {
 			throw new SKVPNonInitializedReaderException();
 		}
 		return fps;
+	}
+	
+	/**
+	 * Get Number of frames in current SKVP file, according to the optional value
+	 * specified in the SKVP header
+	 * 
+	 * @return Number of frames as specified in SKVP header, (-1) if not specified
+	 * @throws SKVPNonInitializedReaderException
+	 */
+	public synchronized long getNumFrames() throws SKVPNonInitializedReaderException {
+		if (! headerReadSuccessfully) {
+			throw new SKVPNonInitializedReaderException();
+		}
+		return numFrames;
 	}
 	
 	/**
@@ -274,6 +307,19 @@ public class SKVPReader {
 			throw new SKVPNonInitializedReaderException();
 		}
 		return cameraDestination;
+	}
+	
+	/**
+	 * Get scene rotation of the camera in degrees
+	 * 
+	 * @return Scene rotation in degrees
+	 * @throws SKVPNonInitializedReaderException
+	 */
+	public synchronized double getCameraSceneRotation() throws SKVPNonInitializedReaderException {
+		if (! headerReadSuccessfully) {
+			throw new SKVPNonInitializedReaderException();
+		}
+		return cameraSceneRotation;
 	}
 	
 	

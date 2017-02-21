@@ -12,4 +12,8 @@ public abstract class AbstractTest {
 		System.out.println("Test Passed!");
 		return 0;
 	}
+	
+	protected static boolean areDoublesEqual(double d1, double d2) {
+		return Math.abs(d1 - d2) < 0.000000001;
+	}
 }
