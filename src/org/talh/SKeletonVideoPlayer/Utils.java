@@ -220,12 +220,14 @@ public class Utils {
 		return degreeFloor % 360 + realDiff;
 	}
 	
-	public static String getValueFromCameraLine(String line) throws SKVPSyntaxErrorException {
+	public static String getValueFromCameraLine(String line, String entryName) throws SKVPSyntaxErrorException {
 		String[] parts = line.split("=");
 		if (parts.length != 2) {
 			throw new SKVPSyntaxErrorException("Illegal camera paremeter line");
 		}
-		
+		if (entryName != null && (! entryName.equals(parts[0].trim()))) {
+			throw new SKVPSyntaxErrorException("Entry name is illegal");
+		}
 		return parts[1].trim();
 	}
 	

@@ -32,6 +32,7 @@ public class Test58 extends AbstractTest {
 		}
 		for (int i = 0 ; i < 20 ; i++) {
 			SkeletonVideoFrame frame = null;
+			boolean gotSyntaxError = false;
 			try {
 				frame = reader.getNextFrame();
 			} catch (IOException e) {
@@ -42,6 +43,10 @@ public class Test58 extends AbstractTest {
 				if (i != 10 && i != 13 && i != 14 && i != 15) {
 					return 7;
 				}
+				gotSyntaxError = true;
+			}
+			if (i == 10 && i == 13 && i == 14 && i == 15 && (! gotSyntaxError)) {
+				return 77;
 			}
 			Coordinate3D cameraLocation;
 			Coordinate3D cameraDestination;

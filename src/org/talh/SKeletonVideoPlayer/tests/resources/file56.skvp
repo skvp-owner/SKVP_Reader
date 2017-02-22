@@ -23,7 +23,7 @@ CameraDestination=66,55,44
 CameraSceneRotation=99.8877
 9,1,2;3,4,5;6,7,8
 1.0,2,3;4,5.0,6;7,8,9.7
-Kuku=lulu
+CameraSceneRotationKuku=lulu
 1.0,2,3;4,5.0,6;7,8,9.7
 1.0,2,3;4,5.0,6;7,8,9.7
 CameraLocation=33,22,11p

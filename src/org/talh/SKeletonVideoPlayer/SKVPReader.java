@@ -381,15 +381,15 @@ public class SKVPReader {
 				continue;
 			}
 			if (line.startsWith(Defs.CAMERA_LOCATION_ENTRY_NAME)) {
-				String value = Utils.getValueFromCameraLine(line);
+				String value = Utils.getValueFromCameraLine(line, Defs.CAMERA_LOCATION_ENTRY_NAME);
 				cameraLocationTemporal = Utils.stringToCoordinate3D(value);
 				continue;
 			} else if (line.startsWith(Defs.CAMERA_DESTINATION_ENTRY_NAME)) {
-				String value = Utils.getValueFromCameraLine(line);
+				String value = Utils.getValueFromCameraLine(line, Defs.CAMERA_DESTINATION_ENTRY_NAME);
 				cameraDestinationTemporal = Utils.stringToCoordinate3D(value);
 				continue;
 			} else if (line.startsWith(Defs.CAMERA_SCENE_ROTATION_ENTRY_NAME)) {
-				String value = Utils.getValueFromCameraLine(line);
+				String value = Utils.getValueFromCameraLine(line, Defs.CAMERA_SCENE_ROTATION_ENTRY_NAME);
 				cameraSceneRotationTemporal = Utils.parseRealDegree(value);
 				continue;
 			}
