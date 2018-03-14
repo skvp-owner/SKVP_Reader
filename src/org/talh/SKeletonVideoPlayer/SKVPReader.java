@@ -2,13 +2,18 @@ package org.talh.SKeletonVideoPlayer;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
 
 
 public class SKVPReader {
@@ -69,7 +74,14 @@ public class SKVPReader {
 		if (inputType == InputType.STRING) {
 			reader = new BufferedReader(new StringReader(inputString));
 		} else {
-			reader = new BufferedReader(new FileReader(inputFile));
+			if (inputFile.getName().toLowerCase().endsWith(".gz")) {
+				InputStream fileStream = new FileInputStream(inputFile.getPath());
+				InputStream gzipStream = new GZIPInputStream(fileStream);
+				Reader decoder = new InputStreamReader(gzipStream);
+				reader = new BufferedReader(decoder);
+			} else {
+				reader = new BufferedReader(new FileReader(inputFile));
+			}
 		}
 		Utils.findSKVPHeaderBeginning(reader);
 		HashMap<String, String> headerEntriesAsStrings = Utils.findSKVPVideoStartAndGetHeaderEntries(reader);
